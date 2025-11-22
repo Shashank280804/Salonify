@@ -30,6 +30,6 @@ public class ServiceOffering {
     @Column(nullable = false)
     private Long categoryId;
 
-    private Long image;
+    private String image;
 
 }
