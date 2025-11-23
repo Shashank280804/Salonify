@@ -83,7 +83,7 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public List<Booking> getBookingBySalon(Long salonId) {
+    public List<Booking> getBookingsBySalon(Long salonId) {
         return bookingRepository.findBySalonId(salonId);
     }
 
@@ -97,17 +97,53 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public Booking updateBooking(Long bookingId, BookingStatus status) {
-        return null;
+    public Booking updateBooking(Long bookingId, BookingStatus status) throws Exception {
+        Booking booking = getBookingByid(bookingId);
+
+        booking.setStatus(status);
+        return bookingRepository.save(booking);
     }
 
     @Override
     public List<Booking> getBookingsByDate(LocalDate date, Long salonId) {
-        return List.of();
+        List<Booking> allBookings = getBookingsBySalon(salonId);
+        if(date == null){
+            return allBookings;
+        }
+
+        return allBookings.stream().filter(booking -> isSameDate(booking.getStartTime(),date)|| isSameDate(booking.getEndTime(),date)).collect(Collectors.toList());
+
+
     }
 
+    private boolean isSameDate(LocalDateTime dateTime,LocalDate date){
+
+        return dateTime.toLocalDate().isEqual(date);
+    }
     @Override
     public SalonReport getSalonReport(Long salonId) {
-        return null;
+        List<Booking> bookings =getBookingsBySalon(salonId);
+
+        int totalEarnings = bookings.stream()
+                .mapToInt(Booking::getTotalPrice)
+                .sum();
+
+        Integer totalBookings = bookings.size();
+
+        List<Booking> cancelledBookings = bookings.stream()
+                .filter(booking -> booking.getStatus().equals(BookingStatus.CANCELLED))
+                .collect(Collectors.toList());
+
+        Double totalRefund = cancelledBookings.stream().mapToDouble(Booking::getTotalPrice).sum();
+
+        SalonReport report = new SalonReport();
+        report.setSalonId(salonId);
+        report.setCancelledBookings(cancelledBookings.size());
+        report.setTotalBookings(totalBookings);
+        report.setTotalEarnings(totalEarnings);
+        report.setTotalRefund(totalRefund);
+        report.setTotalBookings(totalBookings);
+
+        return report;
     }
 }
