@@ -9,13 +9,14 @@
         <outputRelativeToContentRoot value="true" />
         <module name="salonify-user-microservice" />
       </profile>
-      <profile name="Annotation profile for service_offer-microservice" enabled="true">
+      <profile name="Annotation profile for booking-microservice" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="false">
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.42/lombok-1.18.42.jar" />
         </processorPath>
+        <module name="booking-microservice" />
         <module name="category-microservice" />
         <module name="service_offer-microservice" />
         <module name="salon-microservice" />
@@ -24,6 +25,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="booking-microservice" options="-parameters" />
       <module name="category-microservice" options="-parameters" />
       <module name="salon-microservice" options="-parameters" />
       <module name="salonify-user-microservice" options="-parameters" />
