@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -24,13 +25,17 @@ public class BookingController {
     private final BookingService bookingService;
 
     @PostMapping
-    public ResponseEntity<Booking> createBooking(@RequestParam Long salonId, @RequestBody BookingRequest bookingRequest) throws Exception {
+    public ResponseEntity<Booking> createBooking(@RequestParam Long salonId,
+                                        @RequestBody BookingRequest bookingRequest
+    ) throws Exception {
 
         UserDTO user = new UserDTO();
         user.setId(1L);
 
         SalonDTO salon = new SalonDTO();
         salon.setId(salonId);
+        salon.setOpenTime(LocalTime.now());
+        salon.setCloseTime(LocalTime.now().plusHours(12));
 
         Set<ServiceDTO> serviceDTOSet = new HashSet<>();
 

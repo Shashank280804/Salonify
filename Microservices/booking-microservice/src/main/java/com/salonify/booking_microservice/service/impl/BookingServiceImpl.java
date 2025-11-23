@@ -51,26 +51,31 @@ public class BookingServiceImpl implements BookingService {
     }
 
     public Boolean isTimeSlotAvailable(SalonDTO salonDTO, LocalDateTime bookingStartTime, LocalDateTime bookingEndTime) throws Exception {
+        if (salonDTO == null) {
+            throw new Exception("Salon information is missing");
+        }
+        if (salonDTO.getOpenTime() == null || salonDTO.getCloseTime() == null) {
+            throw new Exception("Salon open/close times are not available for salon id: " + salonDTO.getId());
+        }
+
         LocalDateTime salonOpenTime = salonDTO.getOpenTime().atDate(bookingStartTime.toLocalDate());
         LocalDateTime salonCloseTime = salonDTO.getCloseTime().atDate(bookingEndTime.toLocalDate());
 
-        if(bookingStartTime.isBefore(salonOpenTime) || bookingEndTime.isAfter(salonCloseTime)){
-            throw  new Exception("Booking time must be within salon's working hour");
+        if (bookingStartTime.isBefore(salonOpenTime) || bookingEndTime.isAfter(salonCloseTime)) {
+            throw new Exception("Booking time must be within salon's working hours");
         }
 
-        List<Booking> existingBookings = getBookingsByCustomer(salonDTO.getId());
+        // IMPORTANT: check bookings for the salon (not customer)
+        List<Booking> existingBookings = getBookingsBySalon(salonDTO.getId());
 
-        for(Booking existingBooking: existingBookings){
+        for (Booking existingBooking : existingBookings) {
             LocalDateTime existingBookingStartTime = existingBooking.getStartTime();
             LocalDateTime existingBookingEndTime = existingBooking.getEndTime();
 
-            if(bookingStartTime.isBefore(existingBookingEndTime) && bookingEndTime.isAfter(existingBookingStartTime)){
+            if (bookingStartTime.isBefore(existingBookingEndTime) && bookingEndTime.isAfter(existingBookingStartTime)) {
                 throw new Exception("Slot not available, choose different slot");
-
-
             }
-
-            if(bookingStartTime.isEqual(existingBookingStartTime) || bookingEndTime.isEqual(existingBookingEndTime)){
+            if (bookingStartTime.isEqual(existingBookingStartTime) || bookingEndTime.isEqual(existingBookingEndTime)) {
                 throw new Exception("Slot not available, choose different slot");
             }
         }
