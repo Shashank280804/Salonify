@@ -10,31 +10,20 @@
         <module name="eureka_server" />
         <module name="salonify-user-microservice" />
       </profile>
-      <profile name="Annotation profile for category-microservice" enabled="true">
+      <profile name="Annotation profile for booking-microservice" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="false">
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.42/lombok-1.18.42.jar" />
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.42/lombok-1.18.42.jar" />
         </processorPath>
-        <module name="category-microservice" />
         <module name="booking-microservice" />
-      </profile>
-      <profile name="Annotation profile for service_offer-microservice" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="false">
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.42/lombok-1.18.42.jar" />
-        </processorPath>
+        <module name="payment_microservice" />
+        <module name="category-microservice" />
         <module name="service_offer-microservice" />
         <module name="salon-microservice" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="payment_microservice" target="17" />
-    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
