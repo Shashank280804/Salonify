@@ -7,6 +7,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="eureka_server" />
         <module name="salonify-user-microservice" />
       </profile>
       <profile name="Annotation profile for category-microservice" enabled="true">
@@ -39,6 +40,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="booking-microservice" options="-parameters" />
       <module name="category-microservice" options="-parameters" />
+      <module name="eureka_server" options="-parameters" />
       <module name="payment_microservice" options="-parameters" />
       <module name="salon-microservice" options="-parameters" />
       <module name="salonify-user-microservice" options="-parameters" />
