@@ -1,6 +1,5 @@
 package com.salonify.payment_microservice.payload.dto;
 
-import com.salonify.booking_microservice.domain.BookingStatus;
 import lombok.Data;
 
 import java.time.LocalDateTime;
