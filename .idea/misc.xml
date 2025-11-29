@@ -11,6 +11,7 @@
         <option value="$PROJECT_DIR$/Microservices/service_offer-microservice/pom.xml" />
         <option value="$PROJECT_DIR$/Microservices/booking-microservice/booking-microservice/pom.xml" />
         <option value="$PROJECT_DIR$/Microservices/booking-microservice/pom.xml" />
+        <option value="$PROJECT_DIR$/Microservices/payment_microservice/payment_microservice/pom.xml" />
       </list>
     </option>
   </component>
