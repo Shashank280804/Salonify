@@ -2,6 +2,7 @@ package com.salonify.payment_microservice.controller;
 
 import com.razorpay.RazorpayException;
 import com.salonify.payment_microservice.domain.PaymentMethod;
+import com.salonify.payment_microservice.model.PaymentOrder;
 import com.salonify.payment_microservice.payload.dto.BookingDTO;
 import com.salonify.payment_microservice.payload.dto.UserDTO;
 import com.salonify.payment_microservice.payload.response.PaymentLinkResponse;
@@ -32,5 +33,30 @@ public class PaymentController {
         return ResponseEntity.ok(res);
 
 
+    }
+
+    @GetMapping("/{paymentOrderId}")
+    public ResponseEntity<PaymentOrder> getPaymentOrderById(
+
+            @PathVariable Long paymentOrderId
+    ) throws Exception {
+        UserDTO user = new UserDTO();
+        user.setFullName("shashank");
+        user.setEmail("shashank@gmail.com");
+        user.setId(1L);
+
+        PaymentOrder res = paymentService.getPaymentOrderById(paymentOrderId);
+        return ResponseEntity.ok(res);
+    }
+
+    @PatchMapping("/proceed")
+    public ResponseEntity<Boolean> proceedPaymentOrder(
+            @RequestParam String paymentId,
+            @RequestParam String paymentLinkId
+    ) throws Exception {
+        PaymentOrder paymentOrder = paymentService.getPaymentOrderByPaymentId(paymentLinkId);
+
+        Boolean res = paymentService.proceedPayment(paymentOrder,paymentId,paymentLinkId);
+        return ResponseEntity.ok(res);
     }
 }

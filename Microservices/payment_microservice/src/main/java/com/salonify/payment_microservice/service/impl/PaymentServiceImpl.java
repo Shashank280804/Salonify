@@ -1,9 +1,11 @@
 package com.salonify.payment_microservice.service.impl;
 
+import com.razorpay.Payment;
 import com.razorpay.PaymentLink;
 import com.razorpay.RazorpayClient;
 import com.razorpay.RazorpayException;
 import com.salonify.payment_microservice.domain.PaymentMethod;
+import com.salonify.payment_microservice.domain.PaymentOrderStatus;
 import com.salonify.payment_microservice.model.PaymentOrder;
 import com.salonify.payment_microservice.payload.dto.BookingDTO;
 import com.salonify.payment_microservice.payload.dto.UserDTO;
@@ -77,10 +79,10 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Override
-    public PaymentOrder getPaymentOrderByPaymentId(String paymentId) {
+    public PaymentOrder getPaymentOrderByPaymentId(String paymentOrderId) {
 
 
-        return paymentOrderRepository.findByPaymentLinkId(paymentId);
+        return paymentOrderRepository.findByPaymentLinkId(paymentOrderId);
     }
 
     @Override
@@ -142,5 +144,34 @@ public class PaymentServiceImpl implements PaymentService {
         Session session = Session.create(params);
 
         return session.getUrl();
+    }
+
+    @Override
+    public Boolean proceedPayment(PaymentOrder paymentOrder, String paymentId, String paymentLinkId) throws RazorpayException {
+        if(paymentOrder.getStatus().equals(PaymentOrderStatus.PENDING)){
+            if (paymentOrder.getPaymentMethod().equals(PaymentMethod.RAZORPAY)){
+                RazorpayClient razorpay = new RazorpayClient(razorpayApiKey,razorpayApiSecret);
+                Payment payment = razorpay.payments.fetch(paymentId);
+
+                Integer amount = payment.get("amount");
+                String status = payment.get("status");
+
+                if(status.equals("captured")){
+                    // produce kafka event
+                    paymentOrder.setStatus(PaymentOrderStatus.SUCCESS);
+                    paymentOrderRepository.save(paymentOrder);
+                    return true;
+                }
+                return false;
+            }
+            else{
+                paymentOrder.setStatus(PaymentOrderStatus.SUCCESS);
+                paymentOrderRepository.save(paymentOrder);
+                return true;
+            }
+
+        }
+
+        return false;
     }
 }
