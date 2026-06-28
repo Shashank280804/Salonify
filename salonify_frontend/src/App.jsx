@@ -7,6 +7,9 @@ import { ThemeProvider } from '@mui/material';
 import greenTheme from './theme/greenTheme';
 import Home from './Customer/Home/Home';
 import SalonDetails from './Customer/Salon/SalonDetails/SalonDetails';
+import Bookings from './Customer/Booking/Bookings';
+import Notifications from './Customer/Notification/Notifications';
+import Navbar from './Customer/Navbar/Navbar';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -15,7 +18,10 @@ function App() {
     <>
     <ThemeProvider theme = {greenTheme}>
      {/* <Home/> */}
-     <SalonDetails/>
+     {/* <SalonDetails/> */}
+     {/* <Bookings/> */}
+     {/* <Notifications/> */}
+     <Navbar/>
     </ThemeProvider>
     </>
   )
