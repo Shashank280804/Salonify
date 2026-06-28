@@ -16,13 +16,13 @@ function App() {
 
   return (
     <>
-    <ThemeProvider theme = {greenTheme}>
-     {/* <Home/> */}
-     {/* <SalonDetails/> */}
-     {/* <Bookings/> */}
-     {/* <Notifications/> */}
-     <Navbar/>
-    </ThemeProvider>
+      <ThemeProvider theme={greenTheme}>
+        <Navbar />
+        <Home/>
+        {/* <SalonDetails/> */}
+        {/* <Bookings/> */}
+        {/* <Notifications/> */}
+      </ThemeProvider>
     </>
   )
 }

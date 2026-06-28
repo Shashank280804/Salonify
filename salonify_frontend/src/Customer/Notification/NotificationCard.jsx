@@ -8,7 +8,7 @@ const NotificationCard = () => {
     sx={{bgcolor:"#EAF0F"}}
     className={`cursor-pointer p-5 flex items-center gap-5`}
     >
-        <NotificationsActiveRounded/>
+        <NotificationsActiveRounded />
         <div>
             <p>Your booking got confirmed</p>
             <h1 className='space-x-3'>
