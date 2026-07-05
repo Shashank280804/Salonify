@@ -21,18 +21,18 @@ const Home = () => {
                     </div>
                 </div>
 
-                <div className='w-full lg:w-1/2 border grid gap-3 grid-cols-2 grid-rows-12 h-[45vh] md:h-[90vh]'>
+                <div className='w-full lg:w-1/2 grid gap-3 grid-cols-2 grid-rows-12 h-[45vh] md:h-[90vh]'>
                     <div className='row-span-7'>
-                        <img className='h-full w-full rounded-md' src="" alt="" />
+                        <img className='h-full w-full object-cover rounded-md' src="" alt="" />
                     </div>
                     <div className='row-span-5'>
-                        <img className='h-full w-full rounded-md' src="" alt="" />
+                        <img className='h-full w-full object-cover rounded-md' src="" alt="" />
                     </div>
                     <div className='row-span-7'>
-                        <img className='h-full w-full rounded-md' src="" alt="" />
+                        <img className='h-full w-full object-cover rounded-md' src="" alt="" />
                     </div>
                     <div className='row-span-5'>
-                        <img className='h-full w-full rounded-md' src="" alt="" />
+                        <img className='h-full w-full object-cover rounded-md' src="" alt="" />
                     </div>
 
 

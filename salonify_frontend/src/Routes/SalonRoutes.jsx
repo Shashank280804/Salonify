@@ -8,6 +8,7 @@ import Category from '../Customer/Salon/Category/Category'
 import TransactionTables from '../Customer/Salon/Transaction/TransactionTables'
 import Payment from '../Customer/Salon/Payment/Payment'
 import Notifications from '../Customer/Notification/Notifications'
+import Profile from '../Customer/Salon/Profile/Profile'
 
 const SalonRoutes = () => {
     return (
@@ -20,6 +21,7 @@ const SalonRoutes = () => {
             <Route path="/transaction" element={<TransactionTables />} />
             <Route path="/payment" element={<Payment />} />
             <Route path="/notifications" element={<Notifications />} />
+            <Route path="/account" element={<Profile />} />
         </Routes>
     )
 }
