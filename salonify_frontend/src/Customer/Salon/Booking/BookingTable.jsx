@@ -48,7 +48,7 @@ const rows = [
 export default function BookingTables() {
   return (
     <>
-    <h1 className='pb-5 font-bold text-xl'></h1>
+    <h1 className='pb-5 font-bold text-xl'>Bookings</h1>
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>

@@ -45,17 +45,15 @@ const rows = [
   createData('Gingerbread', 356, 16.0, 49, 3.9),
 ];
 
-export default function ServiceTables() {
+export default function CategoryTables() {
   return (
-    <>
-    <h1 className='pb-5 font-bold text-xl'>Services</h1>
+   <>
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>
             <StyledTableCell>Image</StyledTableCell>
             <StyledTableCell align="right">Title </StyledTableCell>
-            <StyledTableCell align="right">Price</StyledTableCell>
             <StyledTableCell align="right">Update</StyledTableCell>
 
           </TableRow>
@@ -69,7 +67,6 @@ export default function ServiceTables() {
                 </div>
               </StyledTableCell>
               <StyledTableCell align="right">{row.calories}</StyledTableCell>
-              <StyledTableCell align="right">{row.fat}</StyledTableCell>
               <StyledTableCell className='space-y-2' align='right'>
                 <p>Full Name: Code With Shashank</p>
                 <p>shashankpatil@gmail.com</p>
